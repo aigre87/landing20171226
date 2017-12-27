@@ -14,6 +14,7 @@ var gulp        = require('gulp'),
     rename      = require('gulp-rename'),       // Подключаем библиотеку для переименования файлов
     cache       = require('gulp-cache'),        // Подключаем библиотеку кеширования
     //sftp        = require('gulp-sftp'),
+    tiny = require('gulp-tinypng-nokey'),
     spritesmith = require('gulp.spritesmith'),
     plumber     = require('gulp-plumber'),      // Ловим ошибки, чтобы не прервался watch
     svgSprite   = require('gulp-svg-sprite'),
@@ -38,7 +39,7 @@ var path = {
         styles:             'src/styles/*.+(sass|scss|css)',
         images:             'src/images/**/*.*',
         svg:                'src/svgIcons/*.svg',
-        sprite:             'src/sprite/*.*',
+        sprite:             'src/sprite/**/*.*',
         libs:               'src/libs/*.js',
         spriteTemplate:     'src/sass.template.mustache',
         svgSpriteTemplate:  'src/_sprite_template.scss',
@@ -61,7 +62,7 @@ gulp.task('js:build', function () {
         //.pipe(sourcemaps.init()) //Инициализируем sourcemap
         //.pipe(sourcemaps.write())
         .pipe(concat('main.min.js' , {newLine: ';'}))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest(path.build.js))
         .pipe(browserSync.stream())
         .pipe(plumber.stop());
@@ -75,13 +76,30 @@ gulp.task('js:build', function () {
 //libs
 gulp.task('libs:build', function() {
     gulp.src([
-            'src/libs/jquery.min.js',
-            'src/libs/!(jquery.min).js' 
+        'src/libsSrc/jquery/dist/jquery.min.js',
+        'src/libsSrc/magnific-popup/dist/jquery.magnific-popup.min.js',
+        'src/libsSrc/gsap/src/minified/TweenMax.min.js',
+        //'src/libsSrc/gsap/src/minified/plugins/ColorPropsPlugin.min.js',
+        'src/libsSrc/gsap/src/minified/plugins/ScrollToPlugin.min.js',
+        //'src/libsSrc/jquery-selectric/public/jquery.selectric.js',
+        'src/libsSrc/smoothscroll-for-websites/SmoothScroll.js',
+        //'src/libsSrc/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js',
+        'src/libsSrc/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js',
+        //'src/libsSrc/jquery.inputmask/dist/inputmask/inputmask.extensions.js',
+        //'src/libsSrc/jquery.inputmask/dist/inputmask/inputmask.numeric.extensions.js',
+        'src/libsSrc/svg4everybody/dist/svg4everybody.min.js',
+        'src/libsSrc/scrollmagic/scrollmagic/minified/ScrollMagic.min.js',
+        'src/libsSrc/scrollmagic/scrollmagic/minified/plugins/jquery.ScrollMagic.min.js',
+        'src/libsSrc/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js',
+        'src/libsSrc/owl.carousel/dist/owl.carousel.min.js',
+        //'src/libs/Snap.svg/dist/snap.svg.js',
+        'src/libs/all.js',
+        //'src/libs/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js' 
         ])
-        .pipe(plumber())
+        //.pipe(plumber())
         .pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
-        .pipe(uglify())
-        .pipe(plumber.stop())
+        //.pipe(uglify())
+        //.pipe(plumber.stop())
         .pipe(gulp.dest('build/libs/')); // Выгружаем в папку app/js
         // .pipe(sftp({
         //   host: '10.10.4.3',
@@ -103,12 +121,14 @@ gulp.task('fonts:build', function() {
 gulp.task('image:build', function () {
     gulp.src(path.src.images)
         .pipe(plumber())
-        .pipe(cache(imagemin({
-            progressive: true,
-            svgoPlugins: [{removeViewBox: false}],
-            use: [pngquant()],
-            interlaced: true
-        })))
+        // .pipe(imagemin({
+        //     progressive: true,
+        //     svgoPlugins: [{removeViewBox: false}],
+        //     use: [pngquant()],
+        //     optimizationLevel: 5,
+        //     interlaced: true
+        // }))
+        .pipe(tiny())
         .pipe(plumber.stop())
         .pipe(gulp.dest(path.build.images));
         // .pipe(sftp({
@@ -127,7 +147,7 @@ gulp.task('styles:build', function () {
         .pipe(sass())                       // Скомпилируем
         .pipe(prefixer(['last 15 versions', 'IE 8'], { cascade: true }))                   // Добавим вендорные префиксы
         .pipe(concat('template_styles.min.css'))
-        .pipe(cssmin())
+        //.pipe(cssmin())
         //.pipe(sourcemaps.write())           // Пропишем карты
         .pipe(plumber.stop())
         .pipe(gulp.dest(path.build.styles)) // И в build
@@ -206,11 +226,12 @@ gulp.task('build', [
     'svgSprite:build',
     'js:build',
     'fonts:build',
-    'image:build',
     'styles:build'
 ], function(){
     browserSync.init({
         server: "./build",
+        tunnel: false,
+        port: 3000,
         ghostMode: false
     });
 });
