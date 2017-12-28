@@ -143,12 +143,12 @@ gulp.task('styles:build', function () {
 
     gulp.src([path.src.styles])               // Выберем наш .sass|scss
         .pipe(plumber())
-        //.pipe(sourcemaps.init())            // То же самое что и с js
+        .pipe(sourcemaps.init())            // То же самое что и с js
         .pipe(sass())                       // Скомпилируем
         .pipe(prefixer(['last 15 versions', 'IE 8'], { cascade: true }))                   // Добавим вендорные префиксы
         .pipe(concat('template_styles.min.css'))
         //.pipe(cssmin())
-        //.pipe(sourcemaps.write())           // Пропишем карты
+        .pipe(sourcemaps.write())           // Пропишем карты
         .pipe(plumber.stop())
         .pipe(gulp.dest(path.build.styles)) // И в build
         .pipe(browserSync.stream());

@@ -337,6 +337,17 @@
   		  navText: ['<svg class="icon"><use xlink:href="../images/symbol/sprite.svg#ico-leftArrow"></use></svg>',
 	            		'<svg class="icon"><use xlink:href="../images/symbol/sprite.svg#ico-rightArrow"></use></svg>'
 		  	],
+        responsive: {
+          0: {
+						margin: 10,
+          },
+          980:{
+            margin: 20,
+          },
+          1150: {
+						margin: 40,
+          }
+        }
       });
 
 			owl.on("click", function(){
@@ -406,10 +417,24 @@
 
   }
 
+  function mobileMenu(){
+  	var $button = $("header .mobileButton"),
+  			$header = $("header"),
+  			$menu = $("header .menu"),
+  			$shadow = $("header .shadow");
+
+		var $collection = $button.add($menu).add($shadow).add($header);
+		console.log($collection);
+  	$button.on("click", function(){
+			$collection.toggleClass("active");
+  	});
+  }
+
 
 
 	$(document).ready(function(){
 		svg4everybody({});
+		mobileMenu();
 		toogleTable();
 		menuscrollto();
 		formBid();
