@@ -35,9 +35,29 @@ $maket320: 800px;
     font-family: "ALSRublRegular";
     content: 'p';
   }
-
+  
+  .section{
+    position: relative;
+  }
   .blockBg {
+    opacity: 0.15;
     position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-size: cover;
+    background-position: 50% 100%;
+  }
+
+  #paralax1{
+    background-image: url("../images/b1-img1.jpg");
+  }
+  #paralax2{
+    background-image: url("../images/b3-img1.jpg");
+  }
+  #paralax3{
+    background-image: url("../images/b5-img1.jpg");
   }
 
   input[type='checkbox'] {
@@ -109,16 +129,23 @@ $maket320: 800px;
     z-index: 1;
     cursor: pointer;
   }
-
-  .purpleH-gradient{
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6441a5+0,321958+100 */
-    background: #6441a5; /* Old browsers */
-    background: -moz-linear-gradient(left, #6441a5 0%, #321958 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, #6441a5 0%,#321958 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, #6441a5 0%,#321958 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6441a5', endColorstr='#321958',GradientType=1 ); /* IE6-9 */
+  .purpleH-gradient-under{
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7253ad+0,452f67+100 */
+    background: #7253ad; /* Old browsers */
+    background: -moz-linear-gradient(left, #7253ad 0%, #452f67 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #7253ad 0%,#452f67 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #7253ad 0%,#452f67 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7253ad', endColorstr='#452f67',GradientType=1 ); /* IE6-9 */
+  }
+  .purpleH-gradient-upper{
+    background-image: -webkit-linear-gradient(right, rgba(50, 25, 87, 0.8) -28%, rgba(18,0,39,.62), rgba(35,13,65,.62) 21%, rgba(99,64,164,0));
+    background-image: -moz-linear-gradient(right, rgba(50, 25, 87, 0.8) -28%, rgba(18,0,39,.62), rgba(35,13,65,.62) 21%, rgba(99,64,164,0));
+    background-image: -o-linear-gradient(right, rgba(50, 25, 87, 0.8) -28%, rgba(18,0,39,.62), rgba(35,13,65,.62) 21%, rgba(99,64,164,0));
+    background-image: -ms-linear-gradient(right, rgba(50, 25, 87, 0.8) -28%, rgba(18,0,39,.62), rgba(35,13,65,.62) 21%, rgba(99,64,164,0));
+    background-image: linear-gradient(to left, rgba(50, 25, 87, 0.8) -28%, rgba(18,0,39,.62), rgba(35,13,65,.62) 21%, rgba(99,64,164,0));
   }
   .layout{
+    position: relative;
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 20px;
@@ -159,7 +186,16 @@ $maket320: 800px;
   /*custom*/
   
   #b1,#b3,#b5{
-    @extend .purpleH-gradient;
+    @extend .purpleH-gradient-under;
+    .paralaxShadow{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      @extend .purpleH-gradient-upper;
+    }
   }
 
   header { 
@@ -353,24 +389,23 @@ $maket320: 800px;
 
   #b1 { 
     position: relative;
-    padding-top: 222px;
-    padding-bottom: 225px;
-    @media only screen and (max-width: $maket1024){
-      padding-top: 194px;
-      padding-bottom: 202px;
-    }
-    @media only screen and (max-width: $maket800){
-      padding-top: 157px;
-      padding-bottom: 132px;
-    }
-    @media only screen and (max-width: $maket320){
-      padding-top: 67px;
-      padding-bottom: 70px;
-    }
     .layout { 
       display: flex;
       flex-direction: row;
+      padding-top: 222px;
+      padding-bottom: 225px;
+      position: relative;
+      @media only screen and (max-width: $maket1024){
+        padding-top: 194px;
+        padding-bottom: 202px;
+      }
+      @media only screen and (max-width: $maket800){
+        padding-top: 157px;
+        padding-bottom: 132px;
+      }
       @media only screen and (max-width: $maket320){
+        padding-top: 67px;
+        padding-bottom: 70px;
         flex-direction: column;
       }
       .lc { 
