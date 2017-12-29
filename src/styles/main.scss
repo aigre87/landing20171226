@@ -218,13 +218,17 @@ $maket320: 800px;
       left: 0;
       top: 0;
       transition: opacity 0.15s ease;
-      &.active{
-        opacity: 0.5;
-        display: block;
+      @media only screen and (max-width: $maket320){
+        &.active{
+          opacity: 0.5;
+          display: block;
+        }        
       }
+
     }
 
     .layout { 
+      position: static;
       display: flex;
       flex-direction: row;
       display: flex;
@@ -1131,7 +1135,7 @@ $maket320: 800px;
                 @media only screen and (max-width: $maket1024){
                   top: 105px;
                 }
-                @media only screen and (max-width: $maket1024){
+                @media only screen and (max-width: $maket800){
                   top: 80px;
                 }
               }
@@ -1144,7 +1148,7 @@ $maket320: 800px;
                 @media only screen and (max-width: $maket1024){
                   top: 104px;
                 }
-                @media only screen and (max-width: $maket1024){
+                @media only screen and (max-width: $maket800){
                   top: 79px;
                 }
 
