@@ -70,6 +70,7 @@
       if (typeof dataScroll == 'undefined') { return false; }
       e.preventDefault();
       disableScroll();
+      mobileMenu("close");
       TweenLite.to(window, 0.8, {
         ease: Sine.easeInOut,
         scrollTo: $("" + dataScroll + "").offset().top,
@@ -423,20 +424,35 @@
 
   }
 
-  function mobileMenu() {
+  function mobileMenu(trigger) {
     var $button = $("header .mobileButton"),
       $header = $("header"),
       $menu = $("header .menu"),
-      $shadow = $("header .shadow");
+      $shadow = $("header .shadow"),
+      $collection = $button.add($menu).add($shadow).add($header);
 
-    var $collection = $button.add($menu).add($shadow).add($header);
+    if( trigger == "init" ){
+        $button.on("click", function() {
+          $collection.toggleClass("active");
+        });
+        $shadow.on("click", function() {
+          $collection.removeClass("active");
+        });
+        // function checkTop(){
+        //   if ($(window).scrollTop() > 0) {
+        //     $header.addClass("top");
+        //   } else {
+        //     $header.removeClass("top");
+        //   }
+        // }
+        // $(window).scroll(function () {
+        //     checkTop();
+        //     setTimeout(function(){ checkTop(); }, 500);
+        // });
 
-    $button.on("click", function() {
-      $collection.toggleClass("active");
-    });
-    $shadow.on("click", function() {
-      $collection.removeClass("active");
-    });
+    }else if( trigger == "close" ){
+        $collection.removeClass("active");
+    }
 
   }
 
@@ -444,7 +460,7 @@
 
   $(document).ready(function() {
     svg4everybody({});
-    mobileMenu();
+    mobileMenu("init");
     toogleTable();
     menuscrollto();
     formBid();
