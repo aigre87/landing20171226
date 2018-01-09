@@ -52,12 +52,31 @@ $maket320: 800px;
 
   #paralax1{
     background-image: url("../images/b1-img1.jpg");
+    @media only screen and ( max-width: 1920px ) {
+      background-image: url("../images/b1-img1-m.jpg");
+    }
+    @media only screen and ( max-width: 800px ) {
+      background-image: url("../images/b1-img1-s.jpg");
+    }
   }
   #paralax2{
     background-image: url("../images/b3-img1.jpg");
+    background-position: 50% 0%;
+    @media only screen and ( max-width: 1920px ) {
+      background-image: url("../images/b3-img1-m.jpg");
+    }
+    @media only screen and ( max-width: 800px ) {
+      background-image: url("../images/b3-img1-s.jpg");
+    }
   }
   #paralax3{
     background-image: url("../images/b5-img1.jpg");
+    @media only screen and ( max-width: 1920px ) {
+      background-image: url("../images/b5-img1-m.jpg");
+    }
+    @media only screen and ( max-width: 800px ) {
+      background-image: url("../images/b5-img1-s.jpg");
+    }
   }
 
   input[type='checkbox'] {
@@ -204,9 +223,12 @@ $maket320: 800px;
     top: 0;
     left: 0;
     width: 100%;
-    &.active{
-      height: 100%;
+    @media only screen and (max-width: $maket320){
+      &.active{
+        height: 100%;
+      }      
     }
+
     .shadow{
       display: none;
       position: absolute;
@@ -268,8 +290,8 @@ $maket320: 800px;
         .mobileButton { 
           display: none;
           position: absolute;
-          right: 15px;
-          top: 15px;
+          right: 28px;
+          top: 34px;
           z-index: 2;
           cursor: pointer;
           @media only screen and (max-width: $maket320){
@@ -591,6 +613,9 @@ $maket320: 800px;
               @media only screen and (max-width: $maket800){
                 font-size: 15px;
               }
+              &.uncomplete{
+                border-bottom: 1px solid red;
+              }
             }
 
             .desc { 
@@ -614,6 +639,7 @@ $maket320: 800px;
               line-height: 28px;
               &+.desc{
                 top: -20px;
+                font-size: 15px;
                 @media only screen and (max-width: $maket800){
                   font-size: 13px;
                   top: -18px;
@@ -1178,6 +1204,8 @@ $maket320: 800px;
                 display: block;
                 max-width: 90%;
                 max-height: 90%;
+                width: auto;
+                height: auto;
               }
               &.slon{
                 background: #01152f;
@@ -1502,9 +1530,10 @@ $maket320: 800px;
                 @media only screen and (max-width: $maket1024){
                   padding-left: 15px;
                   padding-right: 15px;
+                  justify-content: center;
                   text-align: center;
                 }
-                @media only screen and (max-width: $maket1024){
+                @media only screen and (max-width: $maket800){
                   padding-left: 5px;
                   padding-right: 5px;
                 }
@@ -1783,6 +1812,9 @@ $maket320: 800px;
           margin-left: 8px;
           color: #fff;
           text-decoration: underline;
+          &:hover{
+            text-decoration: none;
+          }
         }
       }
 
@@ -1794,6 +1826,9 @@ $maket320: 800px;
           color: #fff;
           margin-left: 8px;
           text-decoration: underline;
+          &:hover{
+            text-decoration: none;
+          }
         }
       }
     }
