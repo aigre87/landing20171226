@@ -218,7 +218,7 @@ $maket320: 800px;
   }
 
   header { 
-    position: absolute;
+    position: fixed;
     z-index: 100;
     top: 0;
     left: 0;
@@ -227,6 +227,31 @@ $maket320: 800px;
       &.active{
         height: 100%;
       }      
+    }
+    .layout { 
+      transition: all 0.15s ease-in-out;
+      height: 65px;
+      @media only screen and (max-width: $maket1024){
+        height: 70px;
+      }
+      @media only screen and (max-width: $maket1024){
+
+      }
+    }
+    &.scroll{
+      .layout { 
+        height: 65px;
+        background-color: rgba(75, 45, 127, 0.6);
+        @media only screen and (max-width: $maket1024){
+          height: 70px;
+        }
+        @media only screen and (max-width: $maket320){
+          height: 50px;
+          .menuBlock .mobileButton{
+            top: 25px;
+          } 
+        }
+      }
     }
 
     .shadow{
@@ -255,10 +280,6 @@ $maket320: 800px;
       flex-direction: row;
       display: flex;
       align-items: center;
-      height: 65px;
-      @media only screen and (max-width: $maket1024){
-        height: 70px;
-      }
       .logo { 
         
         svg { 
@@ -294,6 +315,7 @@ $maket320: 800px;
           top: 34px;
           z-index: 2;
           cursor: pointer;
+          transition: all 0.15s ease-in-out;
           @media only screen and (max-width: $maket320){
             display: block;
           }

@@ -438,17 +438,17 @@
         $shadow.on("click", function() {
           $collection.removeClass("active");
         });
-        // function checkTop(){
-        //   if ($(window).scrollTop() > 0) {
-        //     $header.addClass("top");
-        //   } else {
-        //     $header.removeClass("top");
-        //   }
-        // }
-        // $(window).scroll(function () {
-        //     checkTop();
-        //     setTimeout(function(){ checkTop(); }, 500);
-        // });
+        function checkTop(){
+          if ($(window).scrollTop() > 0) {
+            $header.addClass("scroll");
+          } else {
+            $header.removeClass("scroll");
+          }
+        }
+        $(window).scroll(function () {
+            checkTop();
+            setTimeout(function(){ checkTop(); }, 500);
+        });
 
     }else if( trigger == "close" ){
         $collection.removeClass("active");
