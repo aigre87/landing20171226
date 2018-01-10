@@ -223,7 +223,9 @@ $maket320: 800px;
     top: 0;
     left: 0;
     width: 100%;
+    background-color: rgba(75, 45, 127, 0.6);
     @media only screen and (max-width: $maket320){
+      background-color: transparent;
       &.active{
         height: 100%;
       }      
@@ -234,14 +236,13 @@ $maket320: 800px;
       @media only screen and (max-width: $maket1024){
         height: 70px;
       }
-      @media only screen and (max-width: $maket1024){
-
+      @media only screen and (max-width: $maket320){
+        background-color: rgba(75, 45, 127, 0.6);
       }
     }
     &.scroll{
       .layout { 
         height: 65px;
-        background-color: rgba(75, 45, 127, 0.6);
         @media only screen and (max-width: $maket1024){
           height: 70px;
         }
