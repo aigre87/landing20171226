@@ -62,7 +62,7 @@ gulp.task('js:build', function () {
         //.pipe(sourcemaps.init()) //Инициализируем sourcemap
         //.pipe(sourcemaps.write())
         .pipe(concat('main.min.js' , {newLine: ';'}))
-        //.pipe(uglify())
+        .pipe(uglify())
         .pipe(gulp.dest(path.build.js))
         .pipe(browserSync.stream())
         .pipe(plumber.stop());
@@ -98,7 +98,7 @@ gulp.task('libs:build', function() {
         ])
         //.pipe(plumber())
         .pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
-        //.pipe(uglify())
+        .pipe(uglify())
         //.pipe(plumber.stop())
         .pipe(gulp.dest('build/libs/')); // Выгружаем в папку app/js
         // .pipe(sftp({
@@ -143,12 +143,12 @@ gulp.task('styles:build', function () {
 
     gulp.src([path.src.styles])               // Выберем наш .sass|scss
         .pipe(plumber())
-        .pipe(sourcemaps.init())            // То же самое что и с js
+        //.pipe(sourcemaps.init())            // То же самое что и с js
         .pipe(sass())                       // Скомпилируем
         .pipe(prefixer(['last 15 versions', 'IE 8'], { cascade: true }))                   // Добавим вендорные префиксы
         .pipe(concat('template_styles.min.css'))
-        //.pipe(cssmin())
-        .pipe(sourcemaps.write())           // Пропишем карты
+        .pipe(cssmin())
+        //.pipe(sourcemaps.write())           // Пропишем карты
         .pipe(plumber.stop())
         .pipe(gulp.dest(path.build.styles)) // И в build
         .pipe(browserSync.stream());
